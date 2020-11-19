@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Flask-DB',
-    version='0.1.0',
+    version='0.1.1',
     author='Nick Janetakis',
     author_email='nick.janetakis@gmail.com',
     url='https://github.com/nickjj/flask-db',
