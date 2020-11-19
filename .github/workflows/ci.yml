@@ -1,0 +1,40 @@
+name: "CI"
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - "master"
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: "actions/checkout@v2"
+
+      - name: "Set up Python 3.8"
+        uses: "actions/setup-python@v1"
+        with:
+          python-version: "3.8"
+
+      - name: "Lint extension"
+        run: |
+          pip3 install flake8
+          flake8 .
+
+      - name: "Install dependencies and local package"
+        run: |
+          pip3 install Flask==1.1.2
+          make install
+
+      - name: "Ensure databases are created and seeded"
+        run: |
+          cd tests/example_app
+
+          flask db reset --with-testdb > default_results
+          stat exampledb
+          stat exampledb_test
+          [ -s default_results ]
+        env:
+          FLASK_APP: "example.app"
