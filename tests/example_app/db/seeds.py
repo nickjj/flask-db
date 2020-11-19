@@ -10,4 +10,4 @@ initial_user = {
 if User.find_by_username(initial_user['username']) is None:
     User(**initial_user).save()
 
-print('This print statement is only here for the test suite'.)
+print('This print statement is only here for the test suite.')
