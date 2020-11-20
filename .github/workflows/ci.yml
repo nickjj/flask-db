@@ -37,4 +37,4 @@ jobs:
           stat exampledb_test
           [ -s default_results ]
         env:
-          FLASK_APP: "example.app"
+          FLASK_APP: "tests.example_app.example.app"
