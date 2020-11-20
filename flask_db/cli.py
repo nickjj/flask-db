@@ -96,7 +96,20 @@ def seed():
     """
     seeds_path = current_app.config.get("FLASK_DB_SEEDS_PATH",
                                         DEFAULT_SEEDS_PATH)
-    exec(open(seeds_path).read())
+
+    if os.path.isfile and os.path.exists(seeds_path):
+        exec(open(seeds_path).read())
+    else:
+        msg = f"""{seeds_path} does not exist
+
+If you haven't done so already, run: flask db init
+
+If you're using a custom init path (ie. not db/ (the default)) then you can
+define a custom seeds path by setting FLASK_DB_SEEDS_PATH in your app's config.
+
+For example if you did flask db init myapp/migrations then you would want
+to set FLASK_DB_SEEDS_PATH = "myapp/migrations/seeds.py"."""
+        click.echo(msg)
 
     return None
 
