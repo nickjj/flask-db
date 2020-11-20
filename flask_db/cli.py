@@ -21,10 +21,11 @@ def db():
 @db.command()
 @click.option("--with-testdb/--no-with-testdb",
               default=False, show_default=True, help="Create a test DB too?")
+@click.pass_context
 @with_appcontext
-def init(with_testdb):
+def reset(ctx, with_testdb):
     """
-    Initialize the database (this will purge your DB!)
+    Drop, create and seed your database (careful in production).
     """
     db = current_app.extensions["sqlalchemy"].db
     db_uri = current_app.config["SQLALCHEMY_DATABASE_URI"]
@@ -40,6 +41,8 @@ def init(with_testdb):
 
         if not database_exists(db_uri):
             create_database(db_uri)
+
+    ctx.invoke(seed)
 
     return None
 
@@ -62,11 +65,4 @@ def seed():
               default=False, show_default=True, help="Create a test DB too?")
 @click.pass_context
 @with_appcontext
-def reset(ctx, with_testdb):
-    """
-    Initialize and seed the database.
-    """
-    ctx.invoke(init, with_testdb=with_testdb)
-    ctx.invoke(seed)
 
-    return None
