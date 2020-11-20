@@ -1,3 +1,4 @@
+import subprocess
 import os
 
 import click
@@ -60,9 +61,14 @@ def seed():
     return None
 
 
-@db.command()
-@click.option("--with-testdb/--no-with-testdb",
-              default=False, show_default=True, help="Create a test DB too?")
-@click.pass_context
+@db.command(context_settings=dict(ignore_unknown_options=True))
+@click.argument("alembic_args", nargs=-1, type=click.UNPROCESSED)
 @with_appcontext
+def migrate(alembic_args):
+    """Wrap the alembic CLI tool (defaults to running upgrade head)."""
+    if not alembic_args:
+        alembic_args = ("upgrade", "head")
 
+    cmdline = ["alembic"] + list(alembic_args)
+
+    subprocess.call(cmdline)
