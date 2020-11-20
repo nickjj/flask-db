@@ -7,6 +7,8 @@ from flask import current_app
 from flask.cli import with_appcontext
 from sqlalchemy_utils import database_exists, create_database
 
+from flask_db.init import generate_configs
+
 
 DEFAULT_SEEDS_PATH = os.path.join("db", "seeds.py")
 
@@ -17,6 +19,44 @@ def db():
     Manage your SQL database.
     """
     pass
+
+
+@db.command()
+@click.argument("path", default="db/")
+@with_appcontext
+def init(path):
+    """
+    Generate Alembic config files and seeds.py.
+    """
+    copied_files, existing_files = generate_configs(path,
+                                                    current_app.import_name)
+
+    if copied_files is not None:
+        msg = f"""alembic.ini was created in the root of your project
+{path} was created with your Alembic configs, versions/ directory and seeds.py
+"""
+        click.echo(msg)
+
+    if existing_files:
+        click.echo("Also, you already had these files in your project:\n")
+
+        for file in existing_files:
+            click.echo(f"  {file[0]}")
+
+        msg = """
+Instead of aborting or erroring out, a new version of any existing files have
+been created with a .new file extension in their respective directories.
+
+Now you can diff them and decide on what to do next.
+
+Chances are you'll want to use the .new version of any file but if you have
+any custom Alembic configuration you may want to copy those changes over.
+
+If you want to use the .new file as is you can delete your original file and
+then rename the .new file by removing its .new file extension."""
+        click.echo(msg)
+
+    return None
 
 
 @db.command()

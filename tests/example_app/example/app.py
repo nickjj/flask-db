@@ -9,7 +9,8 @@ db = SQLAlchemy()
 
 settings = {
     "SQLALCHEMY_DATABASE_URI": "sqlite:///exampledb",
-    "SQLALCHEMY_TRACK_MODIFICATIONS": False
+    "SQLALCHEMY_TRACK_MODIFICATIONS": False,
+    "FLASK_DB_SEEDS_PATH": "db/seeds.py"
 }
 
 
