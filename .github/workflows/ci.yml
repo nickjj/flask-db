@@ -28,10 +28,30 @@ jobs:
           pip3 install Flask==1.1.2
           make install
 
-      - name: "Ensure databases are created and seeded"
+      - name: "Ensure everything works"
         run: |
           cd tests/example_app
 
+          # Ensure the tests are using clean data.
+          rm -rf tests/example_app/db
+          rm tests/example_app/alembic.ini
+          sed -i "s|db/seeds.py|a/b/c/seeds.py|g" example/app.py
+
+          flask db migrate -h
+          flask db setup a/b/c
+
+          stat a/b/c/versions/.keep
+          stat a/b/c/__init__.py
+          stat a/b/c/script.py.mako
+          stat a/b/c/seeds.py
+          stat a/b/c/__init__.py
+
+          grep -q "script_location = a/b/c" alembic.ini
+          grep -q "tests.example_app.example.app import create_app" a/b/c/env.py
+          flask db migrate revision -m "cool"
+          flask db migrate
+
+          echo "print('make this file produce output')" >> /a/b/c/seeds.py
           flask db reset --with-testdb > default_results
           stat exampledb
           stat exampledb_test
