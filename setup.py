@@ -10,6 +10,8 @@ setup(
     description='A Flask CLI extension to help manage your SQL database.',
     license='MIT',
     packages=['flask_db'],
+    setup_requires=['setuptools_scm'],
+    include_package_data=True,
     platforms='any',
     python_requires='>=3.6',
     zip_safe=False,
