@@ -38,7 +38,7 @@ jobs:
           sed -i "s|db/seeds.py|a/b/c/seeds.py|g" example/app.py
 
           flask db migrate -h
-          flask db setup a/b/c
+          flask db init a/b/c
 
           stat a/b/c/versions/.keep
           stat a/b/c/__init__.py
