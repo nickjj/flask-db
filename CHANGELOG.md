@@ -9,6 +9,18 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Nothing yet!
 
+## [0.2.0] - 2020-11-20
+
+### Added
+
+- `flask db init` to generate Alembic config files and a `seeds.py` file
+- `flask db migrate` which forwards all commands straight to the `alembic` CLI
+
+### Changed
+
+- `flask db init` in its original form has been replaced with `flask db reset`
+- `flask db seed` will fail with a helpful error if `seeds.py` cannot be found
+
 ## [0.1.1] - 2020-11-19
 
 ### Fixed
@@ -21,6 +33,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Everything!
 
-[Unreleased]: https://github.com/nickjj/flask-db/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/nickjj/flask-db/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/nickjj/flask-db/compare/0.1.1...0.2.0
 [0.1.1]: https://github.com/nickjj/flask-db/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/nickjj/flask-db/releases/tag/0.1.0
