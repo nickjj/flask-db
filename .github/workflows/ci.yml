@@ -51,7 +51,7 @@ jobs:
           flask db migrate revision -m "cool"
           flask db migrate
 
-          echo "print('make this file produce output')" >> /a/b/c/seeds.py
+          echo "print('make this file produce output')" >> a/b/c/seeds.py
           flask db reset --with-testdb > default_results
           stat exampledb
           stat exampledb_test
