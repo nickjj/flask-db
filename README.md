@@ -41,6 +41,7 @@ directory](https://github.com/nickjj/flask-db/tree/master/tests/example_app).*
 - Python 3.6+
 - Flask 1.0+
 - SQLAlchemy 1.2+
+- Alembic 1.3+
 
 ## Ensuring the `db` command is available
 
