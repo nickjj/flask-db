@@ -32,9 +32,7 @@ jobs:
         run: |
           cd tests/example_app
 
-          # Ensure the tests are using clean data.
           rm -rf db/
-          rm alembic.ini
           sed -i "s|db/seeds.py|a/b/c/seeds.py|g" example/app.py
 
           flask db migrate -h
