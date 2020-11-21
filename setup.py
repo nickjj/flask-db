@@ -1,13 +1,14 @@
 from setuptools import setup
 
+desc = 'A Flask CLI extension to help migrate and manage your SQL database.'
 
 setup(
     name='Flask-DB',
-    version='0.1.1',
+    version='0.2.0',
     author='Nick Janetakis',
     author_email='nick.janetakis@gmail.com',
     url='https://github.com/nickjj/flask-db',
-    description='A Flask CLI extension to help manage your SQL database.',
+    description=desc,
     license='MIT',
     packages=['flask_db'],
     setup_requires=['setuptools_scm'],
