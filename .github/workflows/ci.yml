@@ -48,13 +48,14 @@ jobs:
 
           grep -q "script_location = a/b/c" alembic.ini
           grep -q "tests.example_app.example.app import create_app" a/b/c/env.py
-          flask db migrate revision -m "cool"
-          flask db migrate
 
           echo "print('make this file produce output')" >> a/b/c/seeds.py
           flask db reset --with-testdb > default_results
           stat exampledb
           stat exampledb_test
           [ -s default_results ]
+
+          flask db migrate revision -m "cool"
+          flask db migrate
         env:
           FLASK_APP: "tests.example_app.example.app"
