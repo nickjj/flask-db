@@ -138,7 +138,8 @@ it.
 
 If the user exists, it skips trying to create the user. Without this check then
 you would end up getting a database uniqueness constraint error on the 2nd run.
-That's because the example test app added a unique index on the username.
+That's because the example test app added a [unique index on the
+username](https://github.com/nickjj/flask-db/blob/master/tests/example_app/example/app.py#L20).
 
 ### `reset`
 
