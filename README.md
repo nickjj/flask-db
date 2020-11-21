@@ -290,9 +290,9 @@ def migrate(directory, message, sql, head, splice, branch_label, version_path,
              rev_id, x_arg)
 ```
 
-Needless to say when you do this for a dozen of commands with many dozens of
-flags it's easy for errors to slip by. It also requires waiting for Flask-Migrate
-to release a new build if Alembic changes how their CLI tool works.
+Needless to say when you do this for a dozen commands with many dozens of flags
+it's easy for errors to slip by. It also requires waiting for Flask-Migrate to
+release a new build if Alembic changes how their CLI tool works.
 
 Another thing is Flask-Migrate's `flask db migrate` command defaults to using
 auto-generated migrations. These are kind of sketchy to use by default because
