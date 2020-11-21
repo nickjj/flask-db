@@ -227,8 +227,8 @@ migrate`.
 Here's the breakdown of these tools:
 
 *Disclaimer: I'm not here to crap on the work of others, I'm simply giving my
-opinion on why I chose to create Flask-DB and don't use Alembic directly,
-Flask-Migrate or Flask-Alembic.*
+opinion on why I chose to create Flask-DB and don't use the Alembic CLI
+directly, Flask-Migrate or Flask-Alembic.*
 
 #### Alembic
 
