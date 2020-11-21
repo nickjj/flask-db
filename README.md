@@ -245,8 +245,8 @@ Besides having config files, Alembic also includes an `alembic` CLI tool to
 interact with your database such as generating migration files, executing
 migrations and more. This tool is fantastic.
 
-Flask-Migrate, Flask-Alembic and Flask-DB all use this `alembic` CLI behind the
-scenes, but they are implemented in much different ways.
+Flask-Migrate, Flask-Alembic and Flask-DB all use Alembic behind the scenes,
+but they are implemented in much different ways.
 
 #### Flask-Migrate
 
@@ -303,12 +303,12 @@ It's a tool exclusively designed for running database migrations with Alembic.
 
 #### Flask-Alembic
 
-This is a very thin wrapper over the `alembic` CLI. It exposes all of the
-`alembic` CLI commands to `flask db` so you can do things like `flask db
-upgrade head`.
+This tool internally imports the Alembic Python library and creates its own CLI
+around that. Not of all of the commands are API compatible with the `alembic`
+CLI.
 
-Like Flask-Migrate it manually maps out all of the APIs. Here's a snippet from
-[Flask-Alembic's `revision` command](https://github.com/davidism/flask-alembic/blob/c8f202d4522123760a52865b6d3806470fa396e9/src/flask_alembic/cli/script.py#L94-L117):
+For example, here's a snippet from [Flask-Alembic's `revision`
+command](https://github.com/davidism/flask-alembic/blob/c8f202d4522123760a52865b6d3806470fa396e9/src/flask_alembic/cli/script.py#L94-L117):
 
 ```py
 @manager.option("message")
@@ -337,9 +337,13 @@ def revision(message, empty, branch, parent, splice, depend, label, path):
     base.revision(message, empty, branch, parent, splice, depend, label, path)
 ```
 
-When you do a `flask db init` with Flask-Alembic it's going to generate the
-default Alembic config files, so it has the same shortcomings of wanting to
-modify them in every project.
+It's missing a few flags that `alembic revision --help` would provide you.
+Personally I'd rather use the official `alembic` CLI since it already exists
+and it's very well tested and developed by the Alembic team.
+
+Also, it doesn't handle `alembic init` or have its own form of `init` so you're
+left having to generate and modify the default Alembic config files in every
+project.
 
 Like Flask-Migrate it also doesn't help with resetting and seeding your
 database.
