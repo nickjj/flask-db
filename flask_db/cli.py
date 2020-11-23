@@ -125,3 +125,5 @@ def migrate(alembic_args):
     cmdline = ["alembic"] + list(alembic_args)
 
     subprocess.call(cmdline)
+
+    return None
