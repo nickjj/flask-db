@@ -364,7 +364,7 @@ aren't that important, it's mainly being future proof and less error prone.
 Since about 2015 I used to create my own `db` CLI command in each project which
 handled resetting and seeding the database. Then I used Alembic directly.
 Anyone who has taken my [Build a SAAS App with Flask
-course](#https://buildasaasappwithflask.com/?utm_source=github&utm_medium=flaskdb&utm_campaign=readme)
+course](https://buildasaasappwithflask.com/?utm_source=github&utm_medium=flaskdb&utm_campaign=readme)
 is probably used to that. 
 
 Flask-DB was created as an improvement to that work flow. Now it's as easy as
