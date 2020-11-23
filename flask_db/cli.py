@@ -16,7 +16,7 @@ DEFAULT_SEEDS_PATH = os.path.join("db", "seeds.py")
 @click.group()
 def db():
     """
-    Manage your SQL database.
+    Migrate and manage your SQL database.
     """
     pass
 

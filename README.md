@@ -75,7 +75,7 @@ Running `flask db --help` will produce this help menu:
 ```sh
 Usage: flask db [OPTIONS] COMMAND [ARGS]...
 
-  Manage your SQL database.
+  Migrate and manage your SQL database.
 
 Options:
   --help  Show this message and exit.
