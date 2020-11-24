@@ -381,7 +381,7 @@ By default Alembic (and therefore Flask-Migrate) will put a `migrations/`
 directory inside of your application.
 
 You can still keep your files there with Flask-DB too. You'll just need to
-configure `FLASK_DB_SEEDS_PATH` to be `yourappname/migrations/seed.py`. You'll
+configure `FLASK_DB_SEEDS_PATH` to be `yourappname/migrations/seeds.py`. You'll
 also want to create that file manually (keeping it empty for now is ok).
 
 That's pretty much all you need to do.
