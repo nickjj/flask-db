@@ -62,7 +62,7 @@ Usage: flask [OPTIONS] COMMAND [ARGS]...
   ...
 
 Commands:
-  db      Manage your SQL database.
+  db      Migrate and manage your SQL database.
 ```
 
 If all went as planned you should see the new `db` command added to your
