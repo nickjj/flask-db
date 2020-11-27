@@ -7,7 +7,10 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Nothing yet!
+### Removed
+
+- `--no-with-testdb` option for `flask db reset` since that is the behavior
+  when `--with-testdb` is omit
 
 ## [0.2.0] - 2020-11-20
 

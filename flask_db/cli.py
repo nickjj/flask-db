@@ -60,8 +60,8 @@ then rename the .new file by removing its .new file extension."""
 
 
 @db.command()
-@click.option("--with-testdb/--no-with-testdb",
-              default=False, show_default=True, help="Create a test DB too?")
+@click.option("--with-testdb", is_flag=True,
+              help="Create a test DB in addition to your main DB?")
 @click.pass_context
 @with_appcontext
 def reset(ctx, with_testdb):

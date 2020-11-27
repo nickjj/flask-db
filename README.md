@@ -159,7 +159,7 @@ It also automatically calls `flask db seed` for you.
 
 ```
 Options:
-  --with-testdb / --no-with-testdb     Create a test DB too?  [default: False]
+  --with-testdb  Create a test DB in addition to your main DB?
 ```
 
 If you run `flask db reset --with-testdb` then a second database will also be
