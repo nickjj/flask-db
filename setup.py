@@ -4,7 +4,7 @@ desc = 'A Flask CLI extension to help migrate and manage your SQL database.'
 
 setup(
     name='Flask-DB',
-    version='0.2.0',
+    version='0.3.0',
     author='Nick Janetakis',
     author_email='nick.janetakis@gmail.com',
     url='https://github.com/nickjj/flask-db',
