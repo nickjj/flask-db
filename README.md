@@ -96,7 +96,7 @@ directory by default.
 
 You can treat `flask db init` as a drop in replacement for `alembic init`.
 
-`flask db init` does something similar. The 3 main differences are:
+`flask db init` does something similar. The 4 main differences are:
 
 1. It defaults to `db/` instead of `yourappname/migrations`, but you can modify
    this path by running `flask db init any/path/you/want`.
@@ -105,7 +105,11 @@ You can treat `flask db init` as a drop in replacement for `alembic init`.
    bit more generic and portable when it comes to finding your
    `SQLALCHEMY_DATABASE_URI`.
 
-3. It creates a `seeds.py` file in the same directory you initialized things to
+3. It also configures Alembic to support auto generating migrations in case you
+   want to use `revision --autogenerate` as a starting point for your
+   migrations (always review them afterwards!).
+
+4. It creates a `seeds.py` file in the same directory you initialized things to
    (more on this next).
 
 ### `seed`
@@ -295,8 +299,10 @@ it's easy for errors to slip by. It also requires waiting for Flask-Migrate to
 release a new build if Alembic changes how their CLI tool works.
 
 Another thing is Flask-Migrate's `flask db migrate` command defaults to using
-auto-generated migrations. These are kind of sketchy to use by default because
-they exclude very important things like indexes.
+auto-generated migrations. This feature is useful for speeding up the process
+of creating migration files but Alembic doesn't detect everything which can be
+very confusing if you're not aware of [Alembic's limitations with
+auto-generate](https://alembic.sqlalchemy.org/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect).
 
 There's also no help for doing things like managing and seeding your database.
 It's a tool exclusively designed for running database migrations with Alembic.
