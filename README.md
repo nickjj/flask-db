@@ -13,6 +13,7 @@ item](#differences-between-alembic-flask-migrate-flask-alembic-and-flask-db).
 
 ## Table of contents
 
+- [Demo video](#demo-video)
 - [Installation](#installation)
 - [Ensuring the `db` command is available](#ensuring-the-db-command-is-available)
 - [Going over the `db` command and its sub-commands](#going-over-the-db-command-and-its-sub-commands)
@@ -22,6 +23,17 @@ item](#differences-between-alembic-flask-migrate-flask-alembic-and-flask-db).
   - [Is it safe to edit the files that `flask db init` created?](#is-it-safe-to-edit-the-files-that-flask-db-init-created)
   - [Should I add migration the files to version control?](#should-i-add-the-migration-files-to-version-control)
 - [About the Author](#about-the-author)
+
+## Demo video
+
+Here's a run down on how this extension works and how you can add it to your
+project:
+
+[![Demo
+Video](https://img.youtube.com/vi/iDTmyF5HZ0Y/0.jpg)](https://www.youtube.com/watch?v=-iDTmyF5HZ0Y)
+
+If you prefer reading instead of video this README file covers installing,
+configuring and using this extension too.
 
 ## Installation
 
