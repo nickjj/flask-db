@@ -30,7 +30,7 @@ Here's a run down on how this extension works and how you can add it to your
 project:
 
 [![Demo
-Video](https://img.youtube.com/vi/iDTmyF5HZ0Y/0.jpg)](https://www.youtube.com/watch?v=-iDTmyF5HZ0Y)
+Video](https://img.youtube.com/vi/iDTmyF5HZ0Y/0.jpg)](https://www.youtube.com/watch?v=iDTmyF5HZ0Y)
 
 If you prefer reading instead of video this README file covers installing,
 configuring and using this extension too.
