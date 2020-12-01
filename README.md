@@ -94,8 +94,8 @@ Options:
 
 Commands:
   init     Generate Alembic config files and seeds.py.
-  seed     Seed the database with your custom records.
   reset    Drop, create and seed your database (careful in production).
+  seed     Seed the database with your custom records.
   migrate  Wrap the alembic CLI tool (defaults to running upgrade head).
 ```
 
@@ -122,41 +122,7 @@ You can treat `flask db init` as a drop in replacement for `alembic init`.
    migrations (always review them afterwards!).
 
 4. It creates a `seeds.py` file in the same directory you initialized things to
-   (more on this next).
-
-### `seed`
-
-Seeds your database with initial records of your choosing.
-
-When you set up your app for the first time in production chances are you'll
-want certain things to be created in your database. At the very least probably
-an initial admin user.
-
-This command will read in and execute a `seeds.py` file that exists in the
-directory that you initialized with `flask db init`. By default that will be
-`db/seeds.py`.
-
-If you supplied a custom init path you must change your seeds path. You can do
-that by setting `FLASK_DB_SEEDS_PATH` in your app's config. For example if you
-ran `flask db init yourappname/migrations` then you'd set `FLASK_DB_SEEDS_PATH
-= "yourappname/migrations/seeds.py"`.
-
-As for the seeds file, you have full control over what you want to do. You can
-add whatever records that make sense for your app or keep the file empty to not
-seed anything.
-
-#### Best practices for seeding data
-
-It's a good idea to make your seeds file idempotent. Meaning, if you run it 1
-time or 100 times the end result should be the same. The [example in the seeds
-file](https://github.com/nickjj/flask-db/tree/master/tests/example_app/db/seeds.py)
-is idempotent because it first checks to see if the user exists before adding
-it.
-
-If the user exists, it skips trying to create the user. Without this check then
-you would end up getting a database uniqueness constraint error on the 2nd run.
-That's because the example test app added a [unique index on the
-username](https://github.com/nickjj/flask-db/blob/master/tests/example_app/example/app.py#L20).
+   (more on this soon).
 
 ### `reset`
 
@@ -165,7 +131,7 @@ Creates your database if it needs to be created along with doing a
 existing data and create any tables based on whatever SQLAlchemy models you
 have.
 
-It also automatically calls `flask db seed` for you.
+It also automatically calls `flask db seed` for you (more on seeding soon).
 
 #### Options
 
@@ -192,7 +158,8 @@ This is something you'll be running all the time in development as you change
 your database models.
 
 It's also something you'd typically run once in production the first time you
-deploy your app.
+deploy your app. This will handle creating your database and syncing all of
+your models as tables in your database.
 
 ##### Deployed your app at least once?
 
@@ -202,7 +169,42 @@ which is really running [Alembic](https://alembic.sqlalchemy.org/en/latest/)
 commands behind the scenes. That is the official migration tool created by the
 same folks who made SQLAlchemy.
 
-That leads us into the next command.
+We'll go over the `migrate` command shortly.
+
+### `seed`
+
+Seeds your database with initial records of your choosing.
+
+When you set up your app for the first time in production chances are you'll
+want certain things to be created in your database. At the very least probably
+an initial admin user.
+
+This command will read in and execute a `seeds.py` file that exists in the
+directory that you initialized with `flask db init`. By default that will be
+`db/seeds.py`.
+
+If you supplied a custom init path you must change your seeds path. You can do
+that by setting `FLASK_DB_SEEDS_PATH` in your app's config. For example if you
+ran `flask db init yourappname/migrations` then you'd set `FLASK_DB_SEEDS_PATH
+= "yourappname/migrations/seeds.py"`.
+
+As for the seeds file, you have full control over what you want to do. You can
+add whatever records that make sense for your app or keep the file empty to not
+seed anything. It's simply a file that's going to get called and execute any
+code you've placed into it.
+
+#### Best practices for seeding data
+
+It's a good idea to make your seeds file idempotent. Meaning, if you run it 1
+time or 100 times the end result should be the same. The [example in the seeds
+file](https://github.com/nickjj/flask-db/tree/master/tests/example_app/db/seeds.py)
+is idempotent because it first checks to see if the user exists before adding
+it.
+
+If the user exists, it skips trying to create the user. Without this check then
+you would end up getting a database uniqueness constraint error on the 2nd run.
+That's because the example test app added a [unique index on the
+username](https://github.com/nickjj/flask-db/blob/master/tests/example_app/example/app.py#L20).
 
 ### `migrate`
 
