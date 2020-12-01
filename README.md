@@ -269,11 +269,19 @@ but they are implemented in much different ways.
 #### Flask-Migrate
 
 At the time of writing this FAQ item (November 2020) the approach this library
-takes is to manually map `alembic` commands, options and arguments internally.
-That leads to hundreds upon hundreds of lines of code to carefully mimic
-Alembic's API.
+takes it to import the Alembic Python module and then build a custom CLI tool
+with various commands, options and arguments that lets you access functionality
+that Alembic already provides.
 
-In my opinion this is very error prone and also not future proof.
+In my opinion this is very error prone because Alembic already has a battle
+hardened `alembic` CLI tool that comes part of the Alembic Python package. You
+get this out of the box when you `pip3 install alembic`. Flask-Migrate is error
+prone because it has hundreds upon hundreds of lines of code re-creating the
+same `alembic` CLI tool that already exists.
+
+Also it's not future proof because if Alembic decides to change its API or add
+new features now you'll need to wait for Flask-Migrate to update all of its
+code and push a new release instead of just grabbing the new `alembic` package.
 
 For example, here's a tiny snippet of code from [Flask-Migrate's `migrate`
 command](https://github.com/miguelgrinberg/Flask-Migrate/blob/4887bd53bc08f10087fe27a4a7d9fe853031cdcf/flask_migrate/cli.py#L64=L90):
@@ -309,8 +317,7 @@ def migrate(directory, message, sql, head, splice, branch_label, version_path,
 ```
 
 Needless to say when you do this for a dozen commands with many dozens of flags
-it's easy for errors to slip by. It also requires waiting for Flask-Migrate to
-release a new build if Alembic changes how their CLI tool works.
+it's easy for errors to slip by.
 
 Another thing is Flask-Migrate's `flask db migrate` command defaults to using
 auto-generated migrations. This feature is useful for speeding up the process
@@ -318,14 +325,14 @@ of creating migration files but Alembic doesn't detect everything which can be
 very confusing if you're not aware of [Alembic's limitations with
 auto-generate](https://alembic.sqlalchemy.org/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect).
 
-There's also no help for doing things like managing and seeding your database.
+There's also no help for doing things like resetting and seeding your database.
 It's a tool exclusively designed for running database migrations with Alembic.
 
 #### Flask-Alembic
 
 This tool internally imports the Alembic Python library and creates its own CLI
-around that. Not of all of the commands are API compatible with the `alembic`
-CLI.
+around that. It's similar to Flask-Migrate in that regard but not of all of the
+commands are API compatible with the `alembic` CLI.
 
 For example, here's a snippet from [Flask-Alembic's `revision`
 command](https://github.com/davidism/flask-alembic/blob/c8f202d4522123760a52865b6d3806470fa396e9/src/flask_alembic/cli/script.py#L94-L117):
@@ -373,17 +380,24 @@ database.
 Flask-DB is more than a database migration tool that wraps Alembic. It also
 includes being able to reset and seed your database.
 
-Unlike using Alembic directly it modernizes and applies a few opinions to the
-default Alembic configuration so that you can usually use these files as is in
-your projects.
+Unlike using Alembic directly for the `init` command it modernizes and applies
+a few opinions to the default Alembic configuration so that you can usually use
+these files as is in your projects without modification. If you do need to
+modify them, that's ok. They are generated in your project which you can edit.
 
-As for migrations, it wraps the `alembic` CLI but it does it with about 5 lines
-of code for everything rather than hundreds of lines of code. The lines of code
-aren't that important, it's mainly being future proof and less error prone.
+As for migrations, it aliases the `alembic` CLI but it does it with about 5
+lines of code for everything rather than hundreds of lines of code. The lines
+of code aren't that important, it's mainly being less error prone and more
+future proof. It's taking advantage of the well tested `alembic` CLI tool that
+Alembic gave us.
+
+That means if a future version of Alembic comes out that adds new features it
+will automatically work with Flask-DB without having to update Flask-DB. All
+you would do is upgrade your `alembic` package version and you're done.
 
 Since about 2015 I used to create my own `db` CLI command in each project which
-handled resetting and seeding the database. Then I used Alembic directly.
-Anyone who has taken my [Build a SAAS App with Flask
+handled resetting and seeding the database. Then I used the `alembic` CLI
+directly.  Anyone who has taken my [Build a SAAS App with Flask
 course](https://buildasaasappwithflask.com/?utm_source=github&utm_medium=flaskdb&utm_campaign=readme)
 is probably used to that. 
 
