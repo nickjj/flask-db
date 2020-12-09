@@ -407,7 +407,9 @@ consistent Alembic CLI API and the added reset + seed functionality.
 
 ### Migrating from using Alembic directly or Flask-Migrate
 
-You have 2 options depending on what you want to do:
+In both cases if you're using Flask-Migrate you'll want to `pip3 uninstall
+Flask-Migrate` since both extensions add a `db` command to Flask. Then
+depending on what you want to do, you have 2 options:
 
 #### 1. Keep all of your existing Alembic files and directory structure
 
