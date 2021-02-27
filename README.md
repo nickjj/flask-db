@@ -22,6 +22,7 @@ item](#differences-between-alembic-flask-migrate-flask-alembic-and-flask-db).
   - [Migrating from using Alembic directly or Flask-Migrate](#migrating-from-using-alembic-directly-or-flask-migrate)
   - [Is it safe to edit the files that `flask db init` created?](#is-it-safe-to-edit-the-files-that-flask-db-init-created)
   - [Should I add migration the files to version control?](#should-i-add-the-migration-files-to-version-control)
+  - [I keep getting a module not found error when migrating](#i-keep-getting-a-module-not-found-error-when-migrating)
 - [About the Author](#about-the-author)
 
 ## Demo video
@@ -55,13 +56,20 @@ directory](https://github.com/nickjj/flask-db/tree/master/tests/example_app).*
 - SQLAlchemy 1.2+
 - Alembic 1.3+
 
-## Ensuring the `db` command is available
+## Ensuring the `db` command is available and everything works
 
-You'll want to make sure to at least set the `FLASK_APP` environment variable:
+You'll want to at least set the `FLASK_APP` and `PYTHONPATH` environment
+variables:
 
 ```sh
 # Replace `hello.app` with your app's name.
 export FLASK_APP=hello.app
+
+# Due to how Alembic works you'll want to set this to be able to migrate
+# your database. It would be expected that you run your migrate commands from
+# the root of your project (more on this migrate command later).
+export PYTHONPATH="."
+
 export FLASK_ENV=development
 ```
 
@@ -472,6 +480,28 @@ This way you can develop and test your migrations locally on your dev box, make
 sure everything works then commit and push your code. At that point you can run
 your migrations in CI and ultimately in production with confidence that it all
 works.
+
+### I keep getting a module not found error when migrating
+
+You might have seen this error: `ModuleNotFoundError: No module named
+'yourappname'`
+
+Chances are you haven't set your `PYTHONPATH="."` env variable. If you're using
+Docker you can set this in your Dockerfile and you'll be good to go. Here's a
+working example from my
+[docker-flask-example](https://github.com/nickjj/docker-flask-example/blob/a560075dbb1ddd23b17aff4c8a80fc32cc7cc6d0/Dockerfile#L62)
+repo.
+
+If you're not using Docker please make sure that your `PYTHONPATH` environment
+variable is available on your shell by doing any of the things below:
+
+- `export PYTHONPATH="."` in your terminal and now it'll be set until you close your terminal
+- Create a `.env` file and then run `source .env` and it'll be set until you close your terminal
+- Run `PYTHONPATH="." flask db migrate` instead of `flask db migrate`
+
+In all cases it would be expected that you run the `flask db migrate` command
+from the root of your project. That's the same directory as where your
+`alembic.ini` file is located.
 
 ## About the author
 
