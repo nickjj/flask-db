@@ -7,6 +7,10 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- Nothing yet!
+
+## [0.3.1] - 2021-03-01
+
 ### Fixed
 
 - `alembic.ini.new` now gets its `script_location` replaced if `alembic.ini` existed
@@ -42,7 +46,8 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Everything!
 
-[Unreleased]: https://github.com/nickjj/flask-db/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/nickjj/flask-db/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/nickjj/flask-db/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/nickjj/flask-db/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/nickjj/flask-db/compare/0.1.1...0.2.0
 [0.1.1]: https://github.com/nickjj/flask-db/compare/0.1.0...0.1.1
