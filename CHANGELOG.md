@@ -7,7 +7,9 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Nothing yet!
+### Fixed
+
+- `alembic.ini.new` now gets its `script_location` replaced if `alembic.ini` existed
 
 ## [0.3.0] - 2020-11-27
 

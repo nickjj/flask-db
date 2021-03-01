@@ -34,6 +34,9 @@ def append_new_extension(path):
 
 
 def replace_in_file(path, search, replace):
+    if not os.path.exists(path):
+        return None
+
     with open(path, "r") as file:
         content = file.read()
 
@@ -77,6 +80,7 @@ def generate_configs(path, current_app_import_name):
             os.path.join(alembic_ini_dst_path(path), "alembic.ini"))
 
     replace_in_file("alembic.ini", "$SCRIPT_LOCATION", path)
+    replace_in_file("alembic.ini.new", "$SCRIPT_LOCATION", path)
     replace_in_file(os.path.join(path, "env.py"),
                     "$CURRENT_APP_IMPORT_NAME", current_app_import_name)
     replace_in_file(os.path.join(path, "env.py"), "  # noqa: E999", "")
