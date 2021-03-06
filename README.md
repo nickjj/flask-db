@@ -488,8 +488,8 @@ You might have seen this error: `ModuleNotFoundError: No module named
 
 Chances are you haven't set your `PYTHONPATH="."` env variable. If you're using
 Docker you can set this in your Dockerfile and you'll be good to go. Here's a
-working example from my
-[docker-flask-example](https://github.com/nickjj/docker-flask-example/blob/a560075dbb1ddd23b17aff4c8a80fc32cc7cc6d0/Dockerfile#L62)
+working example from my [Build a SAAS App with
+Flask](https://github.com/nickjj/build-a-saas-app-with-flask/blob/f1ccd0aaae39cce89e53989dd498d97e1de95820/Dockerfile#L55)
 repo.
 
 If you're not using Docker please make sure that your `PYTHONPATH` environment
