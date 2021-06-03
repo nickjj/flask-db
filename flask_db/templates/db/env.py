@@ -4,7 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from $CURRENT_APP_IMPORT_NAME import create_app  # noqa: E999
+from CURRENT_APP_IMPORT_NAME import create_app
 
 
 # There's no access to current_app here so we must create our own app.

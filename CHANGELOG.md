@@ -7,7 +7,9 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Nothing yet!
+### Changed
+
+- Remove `$` in template placeholders to avoid certain code editor errors
 
 ## [0.3.1] - 2021-03-01
 
