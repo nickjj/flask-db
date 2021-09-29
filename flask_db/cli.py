@@ -1,5 +1,6 @@
 import subprocess
 import os
+import sys
 
 import click
 
@@ -83,9 +84,7 @@ def reset(ctx, with_testdb):
         if not database_exists(db_uri):
             create_database(db_uri)
 
-    ctx.invoke(seed)
-
-    return None
+    sys.exit(ctx.invoke(seed).exit_code)
 
 
 @db.command()
@@ -124,6 +123,4 @@ def migrate(alembic_args):
 
     cmdline = ["alembic"] + list(alembic_args)
 
-    subprocess.call(cmdline)
-
-    return None
+    sys.exit(subprocess.call(cmdline))
