@@ -68,7 +68,7 @@ def reset(ctx, with_testdb):
     """
     Drop, create and seed your database (careful in production).
     """
-    db = current_app.extensions["sqlalchemy"].db
+    db = current_app.extensions["sqlalchemy"]
     db_uri = current_app.config["SQLALCHEMY_DATABASE_URI"]
 
     if not database_exists(db_uri):
