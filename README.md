@@ -70,7 +70,7 @@ export FLASK_APP=hello.app
 # the root of your project (more on this migrate command later).
 export PYTHONPATH="."
 
-export FLASK_ENV=development
+export FLASK_DEBUG=true
 ```
 
 Then run the `flask` binary to see its help menu:
