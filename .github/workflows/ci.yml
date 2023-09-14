@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
 
-      - name: "Set up Python 3.8"
+      - name: "Set up Python 3.11"
         uses: "actions/setup-python@v1"
         with:
-          python-version: "3.8"
+          python-version: "3.11"
 
       - name: "Lint extension"
         run: |
@@ -25,7 +25,7 @@ jobs:
 
       - name: "Install dependencies and local package"
         run: |
-          pip3 install Flask==1.1.2 alembic==1.4.3
+          pip3 install Flask==2.3.3 alembic==1.12.0
           make install
 
       - name: "Ensure everything works"
