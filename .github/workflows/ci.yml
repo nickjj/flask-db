@@ -46,7 +46,7 @@ jobs:
           stat a/b/c/__init__.py
 
           grep -q "script_location = a/b/c" alembic.ini
-          grep -q "tests.example_app.example.app import create_app" a/b/c/env.py
+          grep -q "example.app import create_app" a/b/c/env.py
 
           echo "print('make this file produce output')" >> a/b/c/seeds.py
           flask db reset --with-testdb > default_results
