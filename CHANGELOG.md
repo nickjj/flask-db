@@ -7,7 +7,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Nothing yet!
+- In `.env.py`, remove `.db` from `app.extensions["sqlalchemy"]` to work with Flask-SQLAlchemy 3.1+
 
 ## [0.3.2] - 2021-06-03
 
