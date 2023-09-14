@@ -22,4 +22,4 @@ build: ## Build package and wheel
 
 .PHONY: publish
 publish: ## Publish package to PyPI
-	python3 setup.py sdist upload
+	twine upload dist/*
