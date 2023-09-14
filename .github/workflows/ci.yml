@@ -57,4 +57,4 @@ jobs:
           flask db migrate revision -m "cool"
           flask db migrate
         env:
-          FLASK_APP: "tests.example_app.example.app"
+          FLASK_APP: "example.app"
