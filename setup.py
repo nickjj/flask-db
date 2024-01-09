@@ -21,7 +21,8 @@ setup(
         'SQLAlchemy>=1.2',
         'SQLAlchemy-Utils',
         'Flask-SQLAlchemy>=2.4',
-        'alembic>=1.3'
+        'alembic>=1.3',
+        'setuptools'
     ],
     entry_points={
         'flask.commands': [

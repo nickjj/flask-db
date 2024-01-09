@@ -7,7 +7,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Nothing yet!
+- Ensure `setuptools` is installed as a dependency
 
 ## [0.4.0] - 2023-09-13
 
