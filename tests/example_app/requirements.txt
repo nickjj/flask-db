@@ -2,4 +2,4 @@ Flask==2.3.3
 SQLAlchemy==2.0.20
 SQLAlchemy-Utils==0.41.0
 Flask-SQLAlchemy==3.1.1
-Flask-DB==0.4.0
+Flask-DB==0.4.1
